@@ -1,0 +1,26 @@
+var classant_1_1calibration_1_1_p_i_d___phi_angle_1_1_the_g_u_i =
+[
+    [ "_FitGauss", "class_p_i_d___phi_angle_1_1_the_g_u_i_1_1___fit_gauss.html", "class_p_i_d___phi_angle_1_1_the_g_u_i_1_1___fit_gauss" ],
+    [ "TheGUI", "classant_1_1calibration_1_1_p_i_d___phi_angle_1_1_the_g_u_i.html#afde12f64c64860377a84a5ba356441cf", null ],
+    [ "~TheGUI", "classant_1_1calibration_1_1_p_i_d___phi_angle_1_1_the_g_u_i.html#a651c6ee769f3fdf405e93cf7276398e6", null ],
+    [ "DisplayFit", "classant_1_1calibration_1_1_p_i_d___phi_angle_1_1_the_g_u_i.html#a5d447b9382a5a01a244dc52bf2789d5f", null ],
+    [ "DoFit", "classant_1_1calibration_1_1_p_i_d___phi_angle_1_1_the_g_u_i.html#aa4f39a4474d3d84dbc961c2b788af13b", null ],
+    [ "FinishSlice", "classant_1_1calibration_1_1_p_i_d___phi_angle_1_1_the_g_u_i.html#af7725d18bdc7033510dd4c6d5245ecf6", null ],
+    [ "GetHistogram", "classant_1_1calibration_1_1_p_i_d___phi_angle_1_1_the_g_u_i.html#ad2c92ba15dac7a54a6f512dd73ce4bad", null ],
+    [ "GetNumberOfChannels", "classant_1_1calibration_1_1_p_i_d___phi_angle_1_1_the_g_u_i.html#a421e0152fba793e87d3f5fa23f8bcdf9", null ],
+    [ "InitGUI", "classant_1_1calibration_1_1_p_i_d___phi_angle_1_1_the_g_u_i.html#ac802292207deecd4b7dec9c5b53d3c52", null ],
+    [ "StartSlice", "classant_1_1calibration_1_1_p_i_d___phi_angle_1_1_the_g_u_i.html#ae3f16652d2ab304859b65c188d813c23", null ],
+    [ "StoreFinishSlice", "classant_1_1calibration_1_1_p_i_d___phi_angle_1_1_the_g_u_i.html#a50f2db6303f29dd00f6d8e00e1acab6f", null ],
+    [ "StoreFit", "classant_1_1calibration_1_1_p_i_d___phi_angle_1_1_the_g_u_i.html#a414daf03f6169f634149f108436c9d05", null ],
+    [ "angles", "classant_1_1calibration_1_1_p_i_d___phi_angle_1_1_the_g_u_i.html#a8421c9289565ac1045287099d79fd43f", null ],
+    [ "calibrationManager", "classant_1_1calibration_1_1_p_i_d___phi_angle_1_1_the_g_u_i.html#a9542980e5c2302a1f9ccf1a67d0b2559", null ],
+    [ "canvas", "classant_1_1calibration_1_1_p_i_d___phi_angle_1_1_the_g_u_i.html#ae34ea792e382f36ec8a689028f0ed3bc", null ],
+    [ "fitParameters", "classant_1_1calibration_1_1_p_i_d___phi_angle_1_1_the_g_u_i.html#a6513273fffc9ab5b1dd67da2d5c5861d", null ],
+    [ "func", "classant_1_1calibration_1_1_p_i_d___phi_angle_1_1_the_g_u_i.html#aa48215531696bba01a8699f840dfabf9", null ],
+    [ "h_projection", "classant_1_1calibration_1_1_p_i_d___phi_angle_1_1_the_g_u_i.html#a961e59489dd61062a29c6c5023ffa381", null ],
+    [ "h_result", "classant_1_1calibration_1_1_p_i_d___phi_angle_1_1_the_g_u_i.html#a9fc21e648031d187d1723bd70b4e3eeb", null ],
+    [ "IgnorePreviousFitParameters", "classant_1_1calibration_1_1_p_i_d___phi_angle_1_1_the_g_u_i.html#aaa67507b082f554a52abf027f08f1159", null ],
+    [ "phi_offset", "classant_1_1calibration_1_1_p_i_d___phi_angle_1_1_the_g_u_i.html#ac4a3b65c205955c7a2da001767e8c800", null ],
+    [ "pid_detector", "classant_1_1calibration_1_1_p_i_d___phi_angle_1_1_the_g_u_i.html#a0a736c720385089f64df508a8bb1c285", null ],
+    [ "previousAngles", "classant_1_1calibration_1_1_p_i_d___phi_angle_1_1_the_g_u_i.html#a4f6b30f272cb70f8b56e330d8a2edc0a", null ]
+];

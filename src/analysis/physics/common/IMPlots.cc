@@ -254,11 +254,12 @@ void IM_CB_TAPS_Plots::hist_t::Fill(const TCandidatePtrList& c_CB, const TCandid
     const auto bin1 = h_IM_CB->GetYaxis()->FindBin(c_CB.at(0)->CaloEnergy);
     const auto bin2 = h_IM_CB->GetYaxis()->FindBin(c_CB.at(1)->CaloEnergy);
 
-    if(bin1==bin2) {
+    //if(bin1==bin2) {
         if(sum_CB.M()>1.0) {
             h_IM_CB->Fill(sum_CB.M(),c_CB.at(0)->CaloEnergy);
+            h_IM_CB->Fill(sum_CB.M(),c_CB.at(1)->CaloEnergy);
         }
-    }
+    //}
     h_IM_CB_corr->Fill(sum_as_corr_photons(c_CB).M());
     h_IM_TAPS->Fill(sum_TAPS.M());
 

@@ -61,7 +61,7 @@ protected:
         std::string prefix;
 
         TH1D* h_IM_All;
-        TH1D* h_IM_CB;
+        TH2D* h_IM_CB;
         TH1D* h_IM_CB_corr;
         TH1D* h_IM_TAPS;
 
@@ -78,7 +78,7 @@ protected:
         static const range_t any;
         hist_t(const HistogramFactory& HistFac,
                const range_t& cb, const range_t& taps,
-               const interval<double>& caloEnergy_window);
+               const interval<double>& CaloEnergy_Window);
         void Fill(const TCandidatePtrList& c_CB, const TCandidatePtrList& c_TAPS) const;
         void ShowResult() const;
 

@@ -171,7 +171,7 @@ IM_CB_TAPS_Plots::hist_t::hist_t(const HistogramFactory& HistFac,
     const BinSettings bins_energy(200, 0, 1000);
 
     h_IM_All   = histFac.makeTH1D("IM: All",  "IM / MeV","",bins_IM,"IM_All");
-    h_IM_CB    = histFac.makeTH2D("IM: CB",   "IM / MeV","E [MeV]",bins_IM,BinSettings(9,0,800),"IM_CB");
+    h_IM_CB    = histFac.makeTH2D("IM: CB",   "IM / MeV","E [MeV]",bins_IM,BinSettings(36,0,800),"IM_CB");
     h_IM_CB_corr    = histFac.makeTH1D("IM: CB corr",   "IM / MeV","",bins_IM,"IM_CB_corr");
     h_IM_TAPS  = histFac.makeTH1D("IM: TAPS", "IM / MeV","",bins_IM,"IM_TAPS");
 

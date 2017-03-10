@@ -131,10 +131,11 @@ void Symmetric2Gamma::ShowResult()
 IM_CB_TAPS_Plots::IM_CB_TAPS_Plots(const string& name, OptionsPtr opts)
     : Physics(name, opts)
 {
-    hists.emplace_back(hist_t{HistFac, {2,2}, hist_t::any});
-    hists.emplace_back(hist_t{HistFac, {3,3}, hist_t::any});
-    hists.emplace_back(hist_t{HistFac, {5,5}, hist_t::any});
-    hists.emplace_back(hist_t{HistFac, {6,6}, hist_t::any});
+    const auto& caloEnergyWindow = opts->Get<interval<double>>("CaloEnergyWindow", {-std_ext::inf, std_ext::inf});
+    hists.emplace_back(hist_t{HistFac, {2,2}, hist_t::any, caloEnergyWindow});
+//    hists.emplace_back(hist_t{HistFac, {3,3}, hist_t::any, caloEnergyWindow});
+//    hists.emplace_back(hist_t{HistFac, {5,5}, hist_t::any, caloEnergyWindow});
+//    hists.emplace_back(hist_t{HistFac, {6,6}, hist_t::any, caloEnergyWindow});
 
     const BinSettings bins_Mult(10);
 
@@ -146,8 +147,9 @@ IM_CB_TAPS_Plots::IM_CB_TAPS_Plots(const string& name, OptionsPtr opts)
 const IM_CB_TAPS_Plots::hist_t::range_t IM_CB_TAPS_Plots::hist_t::any = {0, numeric_limits<int>::max()};
 
 IM_CB_TAPS_Plots::hist_t::hist_t(const HistogramFactory& HistFac,
-                                 const range_t& cb, const range_t& taps) :
-    n_CB(cb), n_TAPS(taps)
+                                 const range_t& cb, const range_t& taps,
+                                 const interval<double>& caloEnergy_window) :
+    n_CB(cb), n_TAPS(taps), CaloEnergy_Window(caloEnergy_window)
 {
     auto to_string = [] (const range_t& r) {
         if(r == any)
@@ -190,84 +192,44 @@ void IM_CB_TAPS_Plots::hist_t::Fill(const TCandidatePtrList& c_CB, const TCandid
     if(!n_TAPS.Contains(c_TAPS.size()))
         return;
 
-    auto sum_as_photons = [] (const TCandidatePtrList& cands) {
+    auto sum_as_photons = [this] (const TCandidatePtrList& cands) {
         LorentzVec sum;
         for(auto& cand : cands) {
+            if(CaloEnergy_Window.Contains(cand->CaloEnergy))
+            {
             sum += TParticle(ParticleTypeDatabase::Photon, cand);
+            }
+
         }
         return sum;
-    };
-
-    auto sum_as_corr_photons = [] (const TCandidatePtrList& cands) {
-        // copied from Sergey's kinfitter header
-        // to be applied as Ecorr = Ecl*(1+Fcor)
-        auto EclCorCB = [] (Double_t Ecl) {
-            // CB energy correction
-            // correction for 12 MeV cluster threshold in the CB.
-            Double_t p[5] = {1.52950e-02, 5.92991e-03, 4.57857e-01, 8.98180e-03,
-                             7.75002e-03}; // photon smeared smcal11
-            Double_t Fcor = p[0] / pow(Ecl + p[1], p[2]) + p[3] + p[4] * Ecl;
-            return Fcor;
-        };
-
-        LorentzVec sum;
-        for(auto& cand : cands) {
-            TParticle p(ParticleTypeDatabase::Photon, cand);
-            const double corr = EclCorCB(p.Ek()/1000.0);
-            p *= 1+corr;
-            sum += p;
-        }
-        return sum;
-
-    };
-
-    const auto min_angle = [] (const TCandidatePtrList& cands) {
-        double angle = std_ext::inf;
-
-        for(auto c = utils::makeCombination(cands,2); !c.Done(); ++c) {
-
-            angle = min(angle, std_ext::radian_to_degree(vec3(*c.at(0)).Angle(*c.at(1))));
-
-        };
-        return angle;
-    };
-
-    const auto fill_timing = [] (const TCandidatePtrList& cands, TH2D* h) {
-        for(auto& cand : cands) {
-            auto cl = cand->FindCaloCluster();
-
-            for(auto& hit : cl->Hits)
-                h->Fill(hit.Energy, hit.Time);
-            //            h->Fill(cl->Energy, cl->Time);
-        }
     };
 
     const auto& sum_CB = sum_as_photons(c_CB);
-    const auto& sum_TAPS = sum_as_photons(c_TAPS);
-    h_IM_All->Fill((sum_CB+sum_TAPS).M());
+//    const auto& sum_TAPS = sum_as_photons(c_TAPS);
+//    h_IM_All->Fill((sum_CB+sum_TAPS).M());
     h_IM_CB->Fill(sum_CB.M());
-    h_IM_CB_corr->Fill(sum_as_corr_photons(c_CB).M());
-    h_IM_TAPS->Fill(sum_TAPS.M());
+//    h_IM_CB_corr->Fill(sum_as_corr_photons(c_CB).M());
+//    h_IM_TAPS->Fill(sum_TAPS.M());
 
-    h_Angle_CB->Fill(min_angle(c_CB));
-    h_Angle_TAPS->Fill(min_angle(c_TAPS));
+//    h_Angle_CB->Fill(min_angle(c_CB));
+//    h_Angle_TAPS->Fill(min_angle(c_TAPS));
 
-    fill_timing(c_CB, h_ClusterHitTiming_CB);
-    fill_timing(c_TAPS, h_ClusterHitTiming_TAPS);
+//    fill_timing(c_CB, h_ClusterHitTiming_CB);
+//    fill_timing(c_TAPS, h_ClusterHitTiming_TAPS);
 }
 
 void IM_CB_TAPS_Plots::hist_t::ShowResult() const
 {
     canvas(prefix)
-            << h_Angle_CB
-            << h_Angle_TAPS
-            << h_IM_All
+//            << h_Angle_CB
+//            << h_Angle_TAPS
+//            << h_IM_All
             << h_IM_CB
-            << h_IM_CB_corr
-            << h_IM_TAPS
-            << drawoption("colz")
-            << h_ClusterHitTiming_CB
-            << h_ClusterHitTiming_TAPS
+//            << h_IM_CB_corr
+//            << h_IM_TAPS
+//            << drawoption("colz")
+//            << h_ClusterHitTiming_CB
+//            << h_ClusterHitTiming_TAPS
             << endc;
 }
 
@@ -304,11 +266,11 @@ void IM_CB_TAPS_Plots::ShowResult()
         h.ShowResult();
     }
 
-    canvas(GetName())
-            << h_Mult_All
-            << h_Mult_CB
-            << h_Mult_TAPS
-            << endc;
+//    canvas(GetName())
+//            << h_Mult_All
+//            << h_Mult_CB
+//            << h_Mult_TAPS
+//            << endc;
 }
 
 

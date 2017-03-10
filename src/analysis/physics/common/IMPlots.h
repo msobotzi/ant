@@ -74,9 +74,11 @@ protected:
         using range_t = interval<int>;
         const range_t n_CB;
         const range_t n_TAPS;
+        const interval<double> CaloEnergy_Window;
         static const range_t any;
         hist_t(const HistogramFactory& HistFac,
-               const range_t& cb, const range_t& taps);
+               const range_t& cb, const range_t& taps,
+               const interval<double>& caloEnergy_window);
         void Fill(const TCandidatePtrList& c_CB, const TCandidatePtrList& c_TAPS) const;
         void ShowResult() const;
 
